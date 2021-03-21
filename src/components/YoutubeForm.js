@@ -34,6 +34,7 @@ const onSubmit = (values, onSubmitProps) => {
   setTimeout(() => {
     console.log(values);
     onSubmitProps.setSubmitting(false);
+    onSubmitProps.resetForm();
   }, 3000);
 };
 
@@ -197,6 +198,7 @@ const YoutubeForm = () => {
             <button type="button" onClick={() => setFormData(savedData)}>
               Load data
             </button>
+            <button type="reset">reset</button>
 
             <button type="submit" disabled={!form.isValid || form.isSubmitting}>
               Submit
