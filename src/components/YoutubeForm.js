@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 import * as yup from 'yup';
 import { Formik, Form, Field, ErrorMessage, FieldArray } from 'formik';
@@ -6,6 +6,19 @@ import TextError from './TextError';
 
 const initialValues = {
   name: '', // property  ''name'' of the input
+  email: '',
+  channel: '',
+  comments: '',
+  address: '',
+  social: {
+    facebook: '',
+    twitter: '',
+  },
+  phoneNumbers: ['', ''],
+  phNumbers: [''],
+};
+const savedData = {
+  name: 'jhonatan', // property  ''name'' of the input
   email: '',
   channel: '',
   comments: '',
@@ -39,11 +52,13 @@ const validateComments = (value) => {
 };
 
 const YoutubeForm = () => {
+  const [formData, setFormData] = useState(null);
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formData || initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
+      enableReinitialize
       // validateOnChange={false}
       // validateOnBlur={false}
       validateOnMount
@@ -153,7 +168,7 @@ const YoutubeForm = () => {
                 }}
               </FieldArray>
             </div>
-
+            {/* 
             <button
               type="button"
               onClick={() => {
@@ -177,6 +192,10 @@ const YoutubeForm = () => {
               }}
             >
               validate all form
+            </button> */}
+
+            <button type="button" onClick={() => setFormData(savedData)}>
+              Load data
             </button>
 
             <button type="submit" disabled={!form.isValid || form.isSubmitting}>
